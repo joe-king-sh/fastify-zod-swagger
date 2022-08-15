@@ -1,0 +1,15 @@
+POST http://localhost:3000/api/products HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "This is an amazing product",
+    "price": 100,
+    "content": "super product",
+    "type": "book",
+    "salesStartsAt": "2019-01-01T00:00:00.000Z",
+    "salesEndsAt": "2022-01-01T00:00:00.000Z"
+}
+
+### GET /products/:id
+GET http://localhost:3000/products/c165ad23-2ac3-4d80-80d7-d7b6c3e526bd HTTP/1.1
+Content-Type: application/json
