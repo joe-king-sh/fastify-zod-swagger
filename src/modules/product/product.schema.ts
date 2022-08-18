@@ -97,6 +97,4 @@ export const { schemas: productSchemas, $ref } = buildJsonSchemas(
   }
 );
 
-console.log(JSON.stringify(productSchemas, null, 2));
-
 bindExamples(productSchemas, schemaExamples);
