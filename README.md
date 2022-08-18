@@ -2,7 +2,7 @@
 
 This is sample API that outputs OpenAPI specifications based on the validation schema defined by [Zod]().
 
-Check the example of Swagger-UI from here.
+Check the example of Swagger-UI from here.  
 https://joe-king-sh.github.io/fastify-zod-swagger/
 
 
