@@ -6,7 +6,10 @@ const productRoutes = async (server: FastifyInstance) => {
   server.post("/", {
     schema: {
       body: $ref("createProductBodySchema"),
-      response: { 201: $ref("productResponseSchema") },
+      response: {
+        201: { ...$ref("productResponseSchema"), description: "登録完了" },
+      },
+      tags: ["Product"],
     },
     handler: createProductHandler,
   });
@@ -18,9 +21,10 @@ const productRoutes = async (server: FastifyInstance) => {
       response: {
         200: {
           ...$ref("productResponseSchema"),
-          description: "製品が見つかった",
+          description: "取得成功",
         },
       },
+      tags: ["Product"],
     },
     handler: getProductHandler,
   });

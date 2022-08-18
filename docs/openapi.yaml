@@ -143,6 +143,8 @@ components:
 paths:
   /products/:
     post:
+      tags:
+        - Product
       requestBody:
         content:
           application/json:
@@ -151,14 +153,17 @@ paths:
                 #/components/schemas/productSchemas/properties/createProductBodySchema
       responses:
         '201':
-          description: Default Response
+          description: 登録完了
           content:
             application/json:
               schema:
                 $ref: >-
                   #/components/schemas/productSchemas/properties/productResponseSchema
+                description: 登録完了
   /products/{id}:
     get:
+      tags:
+        - Product
       parameters:
         - schema:
             $ref: >-
@@ -182,10 +187,10 @@ paths:
           required: true
       responses:
         '200':
-          description: 製品が見つかった
+          description: 取得成功
           content:
             application/json:
               schema:
                 $ref: >-
                   #/components/schemas/productSchemas/properties/productResponseSchema
-                description: 製品が見つかった
+                description: 取得成功

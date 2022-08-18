@@ -1,6 +1,9 @@
-import { JsonSchema } from "fastify-zod";
+import { _JsonSchema } from "fastify-zod";
 
-export const bindExamples = (schemas: JsonSchema[], examples: object) => {
+export const bindExamples = (
+  schemas: _JsonSchema[],
+  examples: { [id: string]: object }
+) => {
   if (!schemas || schemas.length === 0) return;
 
   const properties = schemas[0].properties;

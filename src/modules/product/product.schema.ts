@@ -85,7 +85,7 @@ const schemaExamples = {
 };
 
 // Generate jsonschemas from zod schamas.
-export const { schemas: productSchemas, $ref: $ref } = buildJsonSchemas(
+export const { schemas: productSchemas, $ref } = buildJsonSchemas(
   {
     createProductBodySchema,
     productResponseSchema,
@@ -96,5 +96,7 @@ export const { schemas: productSchemas, $ref: $ref } = buildJsonSchemas(
     $id: "productSchemas",
   }
 );
+
+console.log(JSON.stringify(productSchemas, null, 2));
 
 bindExamples(productSchemas, schemaExamples);
