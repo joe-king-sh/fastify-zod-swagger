@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Sample API using Fastify and Zod.
-  description: ZodのバリデーションスキーマからOpenAPI仕様をいい感じに出力するサンプル
+  description: ZodのバリデーションスキーマからリッチなOpenAPI仕様を出力するサンプル
   version: 1.0.0
 components:
   schemas:
@@ -47,14 +47,13 @@ components:
             - salesStartsAt
             - salesEndsAt
           additionalProperties: false
-          description: Create product body schema
           example:
             title: 何らかの製品A
             price: 10000
             content: 素晴らしい製品です
             type: game
-            salesStartsAt: 2022-08-15T14:16:05.347Z
-            salesEndsAt: 2022-08-15T14:16:05.347Z
+            salesStartsAt: 2022-01-01T00:00:00.000Z
+            salesEndsAt: 2022-12-31T00:00:00.000Z
         productResponseSchema:
           type: object
           properties:
@@ -103,11 +102,11 @@ components:
             price: 10000
             content: 素晴らしい製品です
             type: game
-            salesStartsAt: 2022-08-15T14:16:05.347Z
-            salesEndsAt: 2022-08-15T14:16:05.347Z
+            salesStartsAt: 2022-01-01T00:00:00.000Z
+            salesEndsAt: 2022-12-31T00:00:00.000Z
             id: c165ad23-2ac3-4d80-80d7-d7b6c3e526bd
-            createdAt: 2022-08-15T14:16:05.347Z
-            updatedAt: 2022-08-15T14:16:05.347Z
+            createdAt: 2022-06-01T00:00:00.000Z
+            updatedAt: 2022-06-01T00:00:00.000Z
         getProductParamsSchema:
           type: object
           properties:

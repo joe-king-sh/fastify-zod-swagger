@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { buildJsonSchemas, JsonSchema } from "fastify-zod";
+import { buildJsonSchemas } from "fastify-zod";
+import { bindExamples } from "../../utils/openApiSpec";
 
 export const ProductType = {
   book: "book",
@@ -22,18 +23,10 @@ const productGenerated = {
   updatedAt: z.date().describe("更新日"),
 };
 
-// スキーマ定義
-const createProductBodySchema = z
-  .object({
-    ...productInput,
-  })
-  .refine((value) => {
-    value.salesStartsAt <= value.salesEndsAt,
-      {
-        message: "salesStartsAt must be before salesEndsAt",
-      };
-  })
-  .describe("Create product body schema");
+// Zod schema definitions.
+const createProductBodySchema = z.object({
+  ...productInput,
+});
 
 const productResponseSchema = z
   .object({
@@ -50,23 +43,23 @@ const getProductQuerySchema = z.object({
   type: z.optional(z.array(productInput.type)),
 });
 
-// Zodスキーマから型生成
+// Generate types from zod schemas.
 export type CreateProductInput = z.infer<typeof createProductBodySchema>;
 export type ProductOutput = z.infer<typeof productResponseSchema>;
 export type GetProductParamsInput = z.infer<typeof getProductParamsSchema>;
 export type GetProductQueryInput = z.infer<typeof getProductQuerySchema>;
 
-// 型を元にスキーマのExamplesを定義
+// Examples of schemas from types definitions.
 const exampleProduct: ProductOutput = {
   title: "何らかの製品A",
   price: 10_000,
   content: "素晴らしい製品です",
   type: "game",
-  salesStartsAt: new Date(),
-  salesEndsAt: new Date(),
+  salesStartsAt: new Date("2022-01-01"),
+  salesEndsAt: new Date("2022-12-31"),
   id: "c165ad23-2ac3-4d80-80d7-d7b6c3e526bd",
-  createdAt: new Date(),
-  updatedAt: new Date(),
+  createdAt: new Date("2022-06-01"),
+  updatedAt: new Date("2022-06-01"),
 };
 const createProductBodySchemaExample: CreateProductInput = {
   title: exampleProduct.title,
@@ -91,8 +84,8 @@ const schemaExamples = {
   getProductQuerySchemaExample,
 };
 
-// ZodスキーマからJSONスキーマを生成
-export const { schemas: productSchemas, $ref } = buildJsonSchemas(
+// Generate jsonschemas from zod schamas.
+export const { schemas: productSchemas, $ref: $ref } = buildJsonSchemas(
   {
     createProductBodySchema,
     productResponseSchema,
@@ -104,27 +97,4 @@ export const { schemas: productSchemas, $ref } = buildJsonSchemas(
   }
 );
 
-// JSONスキーマにExampleを追加(Zodのままだと追加できない)
-const bindExamples = (schemas: JsonSchema[], examples: object) => {
-  if (!schemas || schemas.length === 0) return;
-
-  console.log(examples);
-
-  const properties = schemas[0].properties;
-
-  for (const key in properties) {
-    const property = properties[key];
-    console.log(key);
-    const example = examples[`${key}Example`];
-
-    console.log({ example });
-
-    property.example = example;
-  }
-
-  // console.log(JSON.stringify(productSchemas, null, 2));
-};
-
 bindExamples(productSchemas, schemaExamples);
-
-// console.log(JSON.stringify(productSchemas, null, 2));

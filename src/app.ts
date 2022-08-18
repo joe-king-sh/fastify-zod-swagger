@@ -2,12 +2,13 @@ import fastify from "fastify";
 import swagger from "@fastify/swagger";
 import fs from "fs";
 import { withRefResolver } from "fastify-zod";
-import { productSchemas } from "./modules/product.schema";
-import productRoutes from "./modules/product.route";
+import { productSchemas } from "./modules/product/product.schema";
+import productRoutes from "./modules/product/product.route";
 
 const server = fastify({
   logger: true,
-  // OpenAPIのexampleがバリデーションスキーマのビルド時に邪魔になるので、ログ出力のみにする
+  // The example attribute for OpenAPI is disturbed by Ajv validation,
+  // so it should be log output only.
   ajv: {
     customOptions: {
       strict: "log",
@@ -24,14 +25,14 @@ const main = async () => {
   server.register(
     swagger,
     withRefResolver({
-      routePrefix: "docs",
+      routePrefix: "/docs",
       exposeRoute: true,
       staticCSP: true,
       openapi: {
         info: {
           title: "Sample API using Fastify and Zod.",
           description:
-            "ZodのバリデーションスキーマからOpenAPI仕様をいい感じに出力するサンプル",
+            "ZodのバリデーションスキーマからリッチなOpenAPI仕様を出力するサンプル",
           version: "1.0.0",
         },
       },
