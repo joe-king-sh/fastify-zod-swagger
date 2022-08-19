@@ -1,7 +1,7 @@
 import { JsonSchema } from "fastify-zod";
 
 declare module "fastify-zod" {
-  type _JsonSchema = JsonSchema & {
+  type MyJsonSchema = JsonSchema & {
     properties?: {
       [key: string]: {
         type: string;
