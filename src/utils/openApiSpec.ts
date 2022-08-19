@@ -7,11 +7,11 @@ export const bindExamples = (
   if (!schemas || schemas.length === 0) return;
 
   const properties = schemas[0].properties;
-  if (!properties) return;
 
-  Object.keys(properties).forEach((key) => {
+  for (const key in properties) {
     const property = properties[key];
     const example = examples[`${key}Example`];
+
     property.example = example;
-  });
+  }
 };
