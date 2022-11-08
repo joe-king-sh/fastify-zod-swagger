@@ -1,5 +1,6 @@
 import fastify from "fastify";
 import swagger from "@fastify/swagger";
+import swaggerUI from "@fastify/swagger-ui";
 import fs from "fs";
 import { withRefResolver } from "fastify-zod";
 import { productSchemas } from "./modules/product/product.schema";
@@ -25,9 +26,6 @@ const main = async () => {
   server.register(
     swagger,
     withRefResolver({
-      routePrefix: "/docs",
-      exposeRoute: true,
-      staticCSP: true,
       openapi: {
         info: {
           title: "Sample API using Fastify and Zod.",
@@ -38,6 +36,11 @@ const main = async () => {
       },
     })
   );
+
+  server.register(swaggerUI, {
+    routePrefix: "/docs",
+    staticCSP: true,
+  })
 
   server.register(productRoutes, { prefix: "/products" });
 
