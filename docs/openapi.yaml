@@ -22,8 +22,9 @@ components:
               default: 100
               description: 価格
             content:
-              type: string
-              nullable: true
+              type:
+                - "null"
+                - string
               description: 内容
             type:
               type: string
@@ -57,23 +58,23 @@ components:
           type: object
           properties:
             title:
-              $ref: >-
-                #/components/schemas/productSchemas/properties/createProductBodySchema/properties/title
+              $ref: "#/components/schemas/productSchemas/properties/createProductBodySchema/p\
+                roperties/title"
             price:
-              $ref: >-
-                #/components/schemas/productSchemas/properties/createProductBodySchema/properties/price
+              $ref: "#/components/schemas/productSchemas/properties/createProductBodySchema/p\
+                roperties/price"
             content:
-              $ref: >-
-                #/components/schemas/productSchemas/properties/createProductBodySchema/properties/content
+              $ref: "#/components/schemas/productSchemas/properties/createProductBodySchema/p\
+                roperties/content"
             type:
-              $ref: >-
-                #/components/schemas/productSchemas/properties/createProductBodySchema/properties/type
+              $ref: "#/components/schemas/productSchemas/properties/createProductBodySchema/p\
+                roperties/type"
             salesStartsAt:
-              $ref: >-
-                #/components/schemas/productSchemas/properties/createProductBodySchema/properties/salesStartsAt
+              $ref: "#/components/schemas/productSchemas/properties/createProductBodySchema/p\
+                roperties/salesStartsAt"
             salesEndsAt:
-              $ref: >-
-                #/components/schemas/productSchemas/properties/createProductBodySchema/properties/salesEndsAt
+              $ref: "#/components/schemas/productSchemas/properties/createProductBodySchema/p\
+                roperties/salesEndsAt"
             id:
               type: string
               format: uuid
@@ -110,8 +111,8 @@ components:
           type: object
           properties:
             id:
-              $ref: >-
-                #/components/schemas/productSchemas/properties/productResponseSchema/properties/id
+              $ref: "#/components/schemas/productSchemas/properties/productResponseSchema/pro\
+                perties/id"
           required:
             - id
           additionalProperties: false
@@ -121,13 +122,13 @@ components:
           type: object
           properties:
             title:
-              $ref: >-
-                #/components/schemas/productSchemas/properties/createProductBodySchema/properties/title
+              $ref: "#/components/schemas/productSchemas/properties/createProductBodySchema/p\
+                roperties/title"
             type:
               type: array
               items:
-                $ref: >-
-                  #/components/schemas/productSchemas/properties/createProductBodySchema/properties/type
+                $ref: "#/components/schemas/productSchemas/properties/createProductBodySchema/p\
+                  roperties/type"
           additionalProperties: false
           example:
             title: 何らかの製品A
@@ -148,48 +149,45 @@ paths:
         content:
           application/json:
             schema:
-              $ref: >-
-                #/components/schemas/productSchemas/properties/createProductBodySchema
+              $ref: "#/components/schemas/productSchemas/properties/createProductBodySchema"
       responses:
-        '201':
+        "201":
           description: 登録完了
           content:
             application/json:
               schema:
-                $ref: >-
-                  #/components/schemas/productSchemas/properties/productResponseSchema
+                $ref: "#/components/schemas/productSchemas/properties/productResponseSchema"
                 description: 登録完了
-  /products/{id}:
+  "/products/{id}":
     get:
       tags:
         - Product
       parameters:
         - schema:
-            $ref: >-
-              #/components/schemas/productSchemas/properties/createProductBodySchema/properties/title
+            $ref: "#/components/schemas/productSchemas/properties/createProductBodySchema/p\
+              roperties/title"
           in: query
           name: title
           required: false
         - schema:
             type: array
             items:
-              $ref: >-
-                #/components/schemas/productSchemas/properties/createProductBodySchema/properties/type
+              $ref: "#/components/schemas/productSchemas/properties/createProductBodySchema/p\
+                roperties/type"
           in: query
           name: type
           required: false
         - schema:
-            $ref: >-
-              #/components/schemas/productSchemas/properties/productResponseSchema/properties/id
+            $ref: "#/components/schemas/productSchemas/properties/productResponseSchema/pro\
+              perties/id"
           in: path
           name: id
           required: true
       responses:
-        '200':
+        "200":
           description: 取得成功
           content:
             application/json:
               schema:
-                $ref: >-
-                  #/components/schemas/productSchemas/properties/productResponseSchema
+                $ref: "#/components/schemas/productSchemas/properties/productResponseSchema"
                 description: 取得成功
