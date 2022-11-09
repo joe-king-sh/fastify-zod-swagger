@@ -12,7 +12,7 @@ https://joe-king-sh.github.io/fastify-zod-swagger/
 
 ```bash
 $ node --version
-node v18.1.0
+node v18.2.1
 ```
 
 ### Installing
